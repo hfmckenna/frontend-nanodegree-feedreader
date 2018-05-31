@@ -97,9 +97,10 @@ $(function () {
                 done();
             })
         });
-
+        //Could simply have found document.getElementsByClassName('entry') but
+        //this confirms the relationship as well, just in case of changes.
         it('should contain at least one entry', function () {
-            expect(document.getElementsByClassName('entry').length).toBeGreaterThan(0);
+            expect(document.getElementsByClassName('feed')[0].getElementsByClassName('entry-link').length).toBeGreaterThan(0);
         });
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
