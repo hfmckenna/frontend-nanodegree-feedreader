@@ -89,14 +89,10 @@ $(function () {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         beforeEach(function (done) {
-            //First time using jQuery Ajax, if someone added another Ajax
-            //call this might break testing. Would be good to specify
-            //which function is calling back. This looks like it would 
-            //add some burdensome code, for functionality that might not be added.
-            $(document).ajaxComplete(function () {
+            loadFeed(0, function () {
                 done();
-            })
-        });
+            });
+        })
         //Could simply have found document.getElementsByClassName('entry') but
         //this confirms the relationship as well, just in case of changes.
         it('should contain at least one entry', function () {
@@ -105,11 +101,22 @@ $(function () {
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function () {
-    /* TODO: Write a test that ensures when a new feed is loaded
-     * by the loadFeed function that the content actually changes.
-     * Remember, loadFeed() is asynchronous.
-     */
-
+        /* TODO: Write a test that ensures when a new feed is loaded
+         * by the loadFeed function that the content actually changes.
+         * Remember, loadFeed() is asynchronous.
+         */
+        var oldFeed,
+            newFeed;
+            oldFeed = $('.feed').html();
+        beforeEach(function (done) {
+            loadFeed(0, function () {
+                newFeed = $('.feed').html();
+                done();
+            });
+        })
+        it('should have updated the HTML', function () {
+            expect(oldFeed).not.toBe(newFeed);
+        })
     });
 
 }());
