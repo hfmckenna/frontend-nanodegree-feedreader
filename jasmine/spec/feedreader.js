@@ -73,27 +73,42 @@ $(function () {
 
         //Really basic test, not ideal that it invokes methods to test but can't see any
         //any way to avoid this in Jasmine at the moment
-        it('displays or hides when clicked upon',function () {
+        it('displays or hides when clicked upon', function () {
             $('.menu-icon-link').click();
-            expect(expect(document.body.className).not.toBe('menu-hidden'));
+            expect(document.body.className).not.toBe('menu-hidden');
             $('.menu-icon-link').click();
-            expect(expect(document.body.className).toBe('menu-hidden'));
+            expect(document.body.className).toBe('menu-hidden');
         })
     });
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function () {
-    /* TODO: Write a test that ensures when the loadFeed
-     * function is called and completes its work, there is at least
-     * a single .entry element within the .feed container.
-     * Remember, loadFeed() is asynchronous so this test will require
-     * the use of Jasmine's beforeEach and asynchronous done() function.
-     */
-    
-});
-    /* TODO: Write a new test suite named "New Feed Selection" */
+        /* TODO: Write a test that ensures when the loadFeed
+         * function is called and completes its work, there is at least
+         * a single .entry element within the .feed container.
+         * Remember, loadFeed() is asynchronous so this test will require
+         * the use of Jasmine's beforeEach and asynchronous done() function.
+         */
+        beforeEach(function (done) {
+            //First time using jQuery Ajax, if someone added another Ajax
+            //call this might break testing. Would be good to specify
+            //which function is calling back. This looks like it would 
+            //add some burdensome code, for functionality that might not be added.
+            $(document).ajaxComplete(function () {
+                done();
+            })
+        });
 
+        it('should contain at least one entry', function () {
+            expect(document.getElementsByClassName('entry').length).toBeGreaterThan(0);
+        });
+    });
+    /* TODO: Write a new test suite named "New Feed Selection" */
+    describe('New Feed Selection', function () {
     /* TODO: Write a test that ensures when a new feed is loaded
      * by the loadFeed function that the content actually changes.
      * Remember, loadFeed() is asynchronous.
      */
+
+    });
+
 }());
