@@ -33,15 +33,23 @@ $(function() {
          */
         it('are defined', function(){
             for (let object of allFeeds) {
-            expect(object.url).toMatch(/(http|https):\/\/.*?\./)
+            expect(object.url).toMatch(/(http|https):\/\/.*?\./);
             }
-        })
+        });
     });
-
+    describe('Name Entries', function(){
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+        it('are defined and not empty', function(){
+            for (let object of allFeeds) {
+            expect(object.name).toBeDefined;
+            expect(object.name).not.toBe(''|null);
+            }
+        });
+    });
+
     });
 
 
