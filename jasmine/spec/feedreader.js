@@ -26,12 +26,17 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
+    describe('URL Entries', function(){
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-
+        it('are defined', function(){
+            for (let object of allFeeds) {
+            expect(object.url).toMatch(/(http|https):\/\/.*?\./)
+            }
+        })
+    });
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
